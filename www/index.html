@@ -42,16 +42,19 @@
                 <div id="view1" class="view center slide-in active">
                     <button class="long" data-action="initInBeacon">Initialize</button>
                     <button class="long" data-action="refresh">Refresh</button>
-                    <button class="long" data-action="attachUser">Attach user</button>
-                    <button class="long" data-action="detachUser">Detach user</button>
+                    <button class="long" data-action="putProperties">put User Properties</button>
+					<button class="long" data-action="getProperty">get User Property</button>
+					<button class="long" data-action="triggerCustomEvent">triggerCustomEvent</button>
+                    <!-- button class="long" data-action="detachUser">Detach user</button -->
                     <button class="long" data-action="checkCapabilitiesAndRights">checkCapabilitiesAndRights</button>
                     <button class="long" data-action="checkCapabilitiesAndRightsWithAlert">checkCapabilitiesAndRightsWithAlert (iOS)</button>
                     <button class="long" data-action="getInRegions">getInRegions (iOS)</button>
                     <button class="long" data-action="getBeaconState">getBeaconState (iOS)</button>
                     <button class="long" data-action="askPermissions">askPermissions (Android)</button>
+					<button class="long" data-action="setLogLevel">setLogLevel</button>
                 </div>
 
-                <div id="view2" class="view">
+                <!-- div id="view2" class="view">
                     <div id="logger">
                     </div>
                 </div>
@@ -67,14 +70,14 @@
                         <label>Email</label>
                         <input id="input-email" type="text" name="email" placeholder="email" />
                     </div>
-                </div>
+                </div-->
 
             </div>
-            <div id="footer">
+            <!--div id="footer">
                 <button data-view="view1" class="active">Actions</button>
                 <button data-view="view2">Logs</button>
                 <button data-view="view3">Settings</button>
-            </div>
+            </div-->
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>

@@ -18,13 +18,6 @@
  */
 var app = {
 
-    clientId    : 'your-clientid',
-    secret      : 'your-secret',
-    user    : {
-        name: 'John Doe',
-        email: 'j.doe@example.com'
-    },
-
 
     // Application Constructor
     initialize: function() {
@@ -50,10 +43,10 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        $('input-clientid').value = app.clientId;
-        $('input-secret').value = app.secret;
-        $('input-username').value = app.user.name;
-        $('input-email').value = app.user.email;
+        //$('input-clientid').value = app.clientId;
+        //$('input-secret').value = app.secret;
+        //$('input-username').value = app.user.name;
+        //$('input-email').value = app.user.email;
 
         if(cordova.plugins.inBeacon){
 
@@ -65,7 +58,7 @@ var app = {
             document.addEventListener('inbeacon.enterproximity', app.inBeaconEvents, false);
             document.addEventListener('inbeacon.exitproximity', app.inBeaconEvents, false);
             document.addEventListener('inbeacon.proximity', app.inBeaconEvents, false);
-            document.addEventListener('inbeacon.appevent', app.inBeaconEvents, false);
+            document.addEventListener('inbeacon.appevent', app.inBeaconEvents, false);			// this is it!
             document.addEventListener('inbeacon.appaction', app.inBeaconEvents, false);
 
             app.initInBeacon();
@@ -73,31 +66,18 @@ var app = {
     },
 
     inBeaconEvents: function (e) {
-        app.log('event: ' + e.name + ' data: ' + JSON.stringify(e.data));
+        app.log('INBEACONEVENT!!!! event: ' + e.name + ' data: ' + JSON.stringify(e.data));
     },
 
     initInBeacon: function () {
-        var userInfo = {
-            clientId : $('input-clientid').value || app.clientId,
-            secret   : $('input-secret').value || app.secret
-        };
-        cordova.plugins.inBeacon.initialize(userInfo, function () {
-            app.log('Succesfully initialized inBeacon API');
-            cordova.plugins.inBeacon.setLogLevel(cordova.plugins.InBeacon.LOG_DEBUG, function () {
-                app.log('loglevel: debug')
-            }, function (error) {
-                app.error('failed to set loglevel ' + error);
-            });
-        }, function (error) {
-            app.error('inBeacon initialization failed ' + error);
-        });
+		app.log('init-inbeacon is OBSOLETE');
     },
 
     log: function (message, type) {
         type = type || "Log";
         var now = new Date().toTimeString();
         console.log(now + ": " + message);
-        $('logger').innerHTML += "<div class='"+type.toLowerCase()+"'>[" + now + "] " + type + ":<br/>" + message + "</div>";
+        //$('logger').innerHTML += "<div class='"+type.toLowerCase()+"'>[" + now + "] " + type + ":<br/>" + message + "</div>";
     },
 
     error: function (message) {
@@ -136,22 +116,48 @@ var app = {
             app.error('refresh failed');
         });
     },
-
-    attachUser: function () {
-        var userInfo = {
-            name  : $('input-username').value || app.user.name,
-            email : $('input-email').value || app.user.email
-        };
-        cordova.plugins.inBeacon.attachUser(userInfo, function () {
-            app.log('Succesfully attached user');
-        }, function () {
-            app.error('Failed to attach user');
+    triggerCustomEvent: function () {
+        cordova.plugins.inBeacon.triggerCustomEvent(44,'oneshot','hallo', function(){
+            app.log('trigger done!');
+        }, function (error) {
+            app.error('trigger failed:'+error);
         });
     },
+	
+    putProperties: function () {
+        var userInfo = {
+            name  : 'pietje puk',
+            email : 'pietje@pukuniversity.com',
+			afstand : 20.7,
+			hoogte: 14
+        };
+        cordova.plugins.inBeacon.putProperties(userInfo, function () {
+            app.log('Succesfully put properties: '+userInfo);
+        }, function () {
+            app.error('Failed to put properties');
+        });
+    },
+    getProperty: function () {
 
+        cordova.plugins.inBeacon.getProperty('name', function (value) {
+            app.log('Succesfully get property name:'+value);
+        }, function () {
+            app.error('Failed to get property name. Does not exist');
+        });
+        cordova.plugins.inBeacon.getProperty('afstand', function (value) {
+            app.log('Succesfully get property afstand:'+value);
+        }, function () {
+            app.error('Failed to get property afstand. Does not exist');
+        });
+        cordova.plugins.inBeacon.getProperty('hoogte', function (value) {
+            app.log('Succesfully get property hoogte:'+value);
+        }, function () {
+            app.error('Failed to get property hoogte. Dioes not exist');
+        });
+    },
     detachUser: function () {
         cordova.plugins.inBeacon.detachUser(function () {
-            app.log('Succesfully detached user');
+            app.log('OBSOLETE detachUser');
         }, function () {
             app.error('Failed to detach user');
         });
@@ -195,7 +201,15 @@ var app = {
         }, function (error) {
             app.error('Oops, we have a problem: ' + error);
         });
-    }
+    },
+	
+	setLogLevel: function () {
+        cordova.plugins.inBeacon.setLogLevel(cordova.plugins.inBeacon.LOG_INFO, function () {
+            app.log('set loglevel to INFO');
+        }, function (error) {
+            app.error('Oops, we have a problem: ' + error);
+        });
+	}
 };
 
 function $(id){
