@@ -9,4 +9,7 @@ rebuild_android
 rebuild_ios
 rebuild_clean
 build.json
+package.json.clean
+config.xml.clean
+
 
