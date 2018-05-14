@@ -30,11 +30,11 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <engine name="android" spec="^6.2.3" />
     <engine name="ios" spec="^4.4.0" />
-    <engine name="android" spec="~6.2.3" />
-    <plugin name="cordova-plugin-inbeacon" spec="https://github.com/inbeacon/cordova-plugin-inbeacon.git">
-        <variable name="INBEACON_CLIENTID" value="your-client-ID" />
-        <variable name="INBEACON_SECRET" value="your-client-secret" />
-    </plugin>
     <plugin name="cordova-plugin-console" spec="^1.0.7" />
+    <plugin name="cordova-plugin-inbeacon" spec="git+https://github.com/inbeacon/cordova-plugin-inbeacon.git">
+        <variable name="INBEACON_CLIENTID" value="yqjoG98S" />
+        <variable name="INBEACON_SECRET" value="TjZZUHlra0RQT3NBT0JGNjlLUFpLcEZDczFnMUU2WU4" />
+    </plugin>
 </widget>

@@ -9,8 +9,8 @@
         ],
         "plugins": {
             "cordova-plugin-inbeacon": {
-                "INBEACON_CLIENTID": "your-client-ID",
-                "INBEACON_SECRET": "your-client-secret"
+                "INBEACON_CLIENTID": "yqjoG98S",
+                "INBEACON_SECRET": "TjZZUHlra0RQT3NBT0JGNjlLUFpLcEZDczFnMUU2WU4"
             },
             "cordova-plugin-console": {}
         }
